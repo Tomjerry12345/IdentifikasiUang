@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "268814781067",
+    "project_id": "database-kecanduan-game",
+    "storage_bucket": "database-kecanduan-game.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:268814781067:android:b9f55425e930b5566d228e",
+        "android_client_info": {
+          "package_name": "com.example.sistempakarkecanduangame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "268814781067-knq0ddmo8ftrs4fla0l60u59bijj4up5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sistempakarkecanduangame",
+            "certificate_hash": "ff99ee4576d5ec87c6a68544acd31200e6eacba9"
+          }
+        },
+        {
+          "client_id": "268814781067-3dpmcbpsiaf927r0l10ioschhuqi5jff.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpuj5lx6VIu7IiFQbDYSnjC7GL0X5fpVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "268814781067-3dpmcbpsiaf927r0l10ioschhuqi5jff.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
