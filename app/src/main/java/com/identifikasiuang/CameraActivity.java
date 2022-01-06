@@ -23,7 +23,6 @@ import android.os.Trace;
 import androidx.annotation.NonNull;
 import androidx.annotation.UiThread;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.util.Size;
@@ -45,7 +44,6 @@ import com.identifikasiuang.tflite.Classifier;
 
 import java.nio.ByteBuffer;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 
 public abstract class CameraActivity extends AppCompatActivity
@@ -93,7 +91,7 @@ public abstract class CameraActivity extends AppCompatActivity
     private Classifier.Model model = Classifier.Model.FLOAT;
     private Classifier.Device device = Classifier.Device.CPU;
     private int numThreads = -1;
-    MediaPlayer tenThousand, fiftyThousand, twentyThousand;
+    MediaPlayer seribu, duaRibu, limaRibu, sepuluhRibu, duaPuluhRibu, limaPuluhRibu, seratusRibu;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -338,27 +336,27 @@ public abstract class CameraActivity extends AppCompatActivity
         handlerThread.start();
         handler = new Handler(handlerThread.getLooper());
 
-//        tenThousand = MediaPlayer.create(this, R.raw.ten_thousand);
-//        twentyThousand = MediaPlayer.create(this, R.raw.twenty_thousand);
-//        fiftyThousand = MediaPlayer.create(this, R.raw.fivety_thousand);
+//        sepuluhRibu = MediaPlayer.create(this, R.raw.ten_thousand);
+//        duaPuluhRibu = MediaPlayer.create(this, R.raw.twenty_thousand);
+//        limaPuluhRibu = MediaPlayer.create(this, R.raw.fivety_thousand);
 //
-//        tenThousand.setOnCompletionListener(MediaPlayer::release);
-//        twentyThousand.setOnCompletionListener(MediaPlayer::release);
-//        fiftyThousand.setOnCompletionListener(MediaPlayer::release);
+//        sepuluhRibu.setOnCompletionListener(MediaPlayer::release);
+//        duaPuluhRibu.setOnCompletionListener(MediaPlayer::release);
+//        limaPuluhRibu.setOnCompletionListener(MediaPlayer::release);
 
-//        tenThousand.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//        sepuluhRibu.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
 //            public void onCompletion(MediaPlayer mp) {
 //                mp.release();
 //            }
 //        });
-//        twentyThousand.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//        duaPuluhRibu.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
 //            public void onCompletion(MediaPlayer mp) {
 //                mp.release();
 //            }
 //        });
-//        fiftyThousand.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//        limaPuluhRibu.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
 //            @Override
 //            public void onCompletion(MediaPlayer mp) {
 //                mp.release();
@@ -546,12 +544,18 @@ public abstract class CameraActivity extends AppCompatActivity
         }
     }
 
-    boolean isTenThousand = false;
-    boolean isTwentyThousand = false;
-    boolean isFiftyThousand = false;
+    boolean isSeribu = false;
+    boolean isDuaRibu = false;
+    boolean isLimaRibu = false;
+    boolean isSepuluhRibu = false;
+    boolean isDuaPuluhRibu = false;
+    boolean isLimaPuluhRibu = false;
+    boolean isSeratusRibu = false;
 
     @UiThread
     protected void showResultsInBottomSheet(List<Classifier.Recognition> results) {
+
+//        Log.println(Log.ASSERT, "list size", "" + results);
 
         if (results != null && results.size() >= 3) {
             Classifier.Recognition recognition = results.get(0);
@@ -564,28 +568,81 @@ public abstract class CameraActivity extends AppCompatActivity
                 float confi = 100 * recognition.getConfidence();
                 Toast.makeText(this, "confi : " + confi, Toast.LENGTH_LONG).show();
 //                try {
-                    if (!isTenThousand && recognitionTextView.getText().toString().equalsIgnoreCase("10.000") && confi > 0.30) {
-                        tenThousand = MediaPlayer.create(this, R.raw.ten_thousand);
-                        tenThousand.start();
-                        isTenThousand = true;
-                        isTwentyThousand = false;
-                        isFiftyThousand = false;
-                        Log.println(Log.ASSERT, "message", "10.000");
-                    } else if (!isTwentyThousand && recognitionTextView.getText().toString().equalsIgnoreCase("20.000") && confi > 0.30) {
-                        twentyThousand = MediaPlayer.create(this, R.raw.twenty_thousand);
-                        twentyThousand.start();
-                        isTwentyThousand = true;
-                        isTenThousand = false;
-                        isFiftyThousand = false;
-                        Log.println(Log.ASSERT, "message", "20.000");
-                    } else if (!isFiftyThousand && recognitionTextView.getText().toString().equalsIgnoreCase("50.000") && confi > 0.30) {
-                        fiftyThousand = MediaPlayer.create(this, R.raw.fivety_thousand);
-                        fiftyThousand.start();
-                        isFiftyThousand = true;
-                        isTenThousand = false;
-                        isTwentyThousand = false;
-                        Log.println(Log.ASSERT, "message", "50.000");
-                    }
+                if (!isSeribu && recognitionTextView.getText().toString().equalsIgnoreCase("1.000") && confi > 0.30) {
+                    seribu = MediaPlayer.create(this, R.raw.seribu);
+                    seribu.start();
+                    isSeribu = true;
+                    isDuaRibu = false;
+                    isLimaRibu = false;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = false;
+                } else if (!isDuaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("2.000") && confi > 0.30) {
+                    duaRibu = MediaPlayer.create(this, R.raw.dua_ribu);
+                    duaRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = true;
+                    isLimaRibu = false;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = false;
+                } else if (!isLimaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("5.000") && confi > 0.30) {
+                    limaRibu = MediaPlayer.create(this, R.raw.lima_ribu);
+                    limaRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = false;
+                    isLimaRibu = true;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = false;
+                } else if (!isSepuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("10.000") && confi > 0.30) {
+                    sepuluhRibu = MediaPlayer.create(this, R.raw.sepuluh_ribu);
+                    sepuluhRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = false;
+                    isLimaRibu = false;
+                    isSepuluhRibu = true;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = false;
+                    Log.println(Log.ASSERT, "message", "10.000");
+                } else if (!isDuaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("20.000") && confi > 0.30) {
+                    duaPuluhRibu = MediaPlayer.create(this, R.raw.dua_puluh_ribu);
+                    duaPuluhRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = false;
+                    isLimaRibu = false;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = true;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = false;
+                    Log.println(Log.ASSERT, "message", "20.000");
+                } else if (!isLimaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("50.000") && confi > 0.30) {
+                    limaPuluhRibu = MediaPlayer.create(this, R.raw.lima_puluh_ribu);
+                    limaPuluhRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = false;
+                    isLimaRibu = false;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = true;
+                    isSeratusRibu = false;
+                    Log.println(Log.ASSERT, "message", "50.000");
+                } else if (!isSeratusRibu && recognitionTextView.getText().toString().equalsIgnoreCase("100.000") && confi > 0.30) {
+                    seratusRibu = MediaPlayer.create(this, R.raw.seratus_ribu);
+                    seratusRibu.start();
+                    isSeribu = false;
+                    isDuaRibu = false;
+                    isLimaRibu = false;
+                    isSepuluhRibu = false;
+                    isDuaPuluhRibu = false;
+                    isLimaPuluhRibu = false;
+                    isSeratusRibu = true;
+                    Log.println(Log.ASSERT, "message", "100.000");
+                }
 //                }
 //                catch (Exception e) {
 //                    Toast.makeText(this, "error  " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
