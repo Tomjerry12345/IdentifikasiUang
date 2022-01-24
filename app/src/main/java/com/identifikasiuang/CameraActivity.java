@@ -16,6 +16,7 @@ import android.media.ImageReader.OnImageAvailableListener;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Trace;
@@ -555,8 +556,6 @@ public abstract class CameraActivity extends AppCompatActivity
     @UiThread
     protected void showResultsInBottomSheet(List<Classifier.Recognition> results) {
 
-//        Log.println(Log.ASSERT, "list size", "" + results);
-
         if (results != null && results.size() >= 3) {
             Classifier.Recognition recognition = results.get(0);
             if (recognition != null) {
@@ -567,87 +566,88 @@ public abstract class CameraActivity extends AppCompatActivity
                             String.format("%.2f", (100 * recognition.getConfidence())) + "%");
                 float confi = 100 * recognition.getConfidence();
                 Toast.makeText(this, "confi : " + confi, Toast.LENGTH_LONG).show();
-//                try {
-                if (!isSeribu && recognitionTextView.getText().toString().equalsIgnoreCase("1.000") && confi > 0.30) {
-                    seribu = MediaPlayer.create(this, R.raw.seribu);
-                    seribu.start();
-                    isSeribu = true;
-                    isDuaRibu = false;
-                    isLimaRibu = false;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = false;
-                } else if (!isDuaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("2.000") && confi > 0.30) {
-                    duaRibu = MediaPlayer.create(this, R.raw.dua_ribu);
-                    duaRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = true;
-                    isLimaRibu = false;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = false;
-                } else if (!isLimaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("5.000") && confi > 0.30) {
-                    limaRibu = MediaPlayer.create(this, R.raw.lima_ribu);
-                    limaRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = false;
-                    isLimaRibu = true;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = false;
-                } else if (!isSepuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("10.000") && confi > 0.30) {
-                    sepuluhRibu = MediaPlayer.create(this, R.raw.sepuluh_ribu);
-                    sepuluhRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = false;
-                    isLimaRibu = false;
-                    isSepuluhRibu = true;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = false;
-                    Log.println(Log.ASSERT, "message", "10.000");
-                } else if (!isDuaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("20.000") && confi > 0.30) {
-                    duaPuluhRibu = MediaPlayer.create(this, R.raw.dua_puluh_ribu);
-                    duaPuluhRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = false;
-                    isLimaRibu = false;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = true;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = false;
-                    Log.println(Log.ASSERT, "message", "20.000");
-                } else if (!isLimaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("50.000") && confi > 0.30) {
-                    limaPuluhRibu = MediaPlayer.create(this, R.raw.lima_puluh_ribu);
-                    limaPuluhRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = false;
-                    isLimaRibu = false;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = true;
-                    isSeratusRibu = false;
-                    Log.println(Log.ASSERT, "message", "50.000");
-                } else if (!isSeratusRibu && recognitionTextView.getText().toString().equalsIgnoreCase("100.000") && confi > 0.30) {
-                    seratusRibu = MediaPlayer.create(this, R.raw.seratus_ribu);
-                    seratusRibu.start();
-                    isSeribu = false;
-                    isDuaRibu = false;
-                    isLimaRibu = false;
-                    isSepuluhRibu = false;
-                    isDuaPuluhRibu = false;
-                    isLimaPuluhRibu = false;
-                    isSeratusRibu = true;
-                    Log.println(Log.ASSERT, "message", "100.000");
+                try {
+                    if (!isSeribu && recognitionTextView.getText().toString().equalsIgnoreCase("1.000") && confi > 0.25) {
+                        seribu = MediaPlayer.create(this, R.raw.seribu);
+                        seribu.start();
+                        isSeribu = true;
+                        isDuaRibu = false;
+                        isLimaRibu = false;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = false;
+                    } else if (!isDuaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("2.000") && confi > 0.30) {
+                        duaRibu = MediaPlayer.create(this, R.raw.dua_ribu);
+                        duaRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = true;
+                        isLimaRibu = false;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = false;
+                    } else if (!isLimaRibu && recognitionTextView.getText().toString().equalsIgnoreCase("5.000") && confi > 0.30) {
+                        limaRibu = MediaPlayer.create(this, R.raw.lima_ribu);
+                        limaRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = false;
+                        isLimaRibu = true;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = false;
+                    } else if (!isSepuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("10.000") && confi > 0.30) {
+                        sepuluhRibu = MediaPlayer.create(this, R.raw.sepuluh_ribu);
+                        sepuluhRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = false;
+                        isLimaRibu = false;
+                        isSepuluhRibu = true;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = false;
+                        Log.println(Log.ASSERT, "message", "10.000");
+                    } else if (!isDuaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("20.000") && confi > 0.30) {
+                        duaPuluhRibu = MediaPlayer.create(CameraActivity.this, R.raw.dua_puluh_ribu);
+                        duaPuluhRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = false;
+                        isLimaRibu = false;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = true;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = false;
+                        Log.println(Log.ASSERT, "message", "20.000");
+                    } else if (!isLimaPuluhRibu && recognitionTextView.getText().toString().equalsIgnoreCase("50.000") && confi > 0.30) {
+                        limaPuluhRibu = MediaPlayer.create(this, R.raw.lima_puluh_ribu);
+                        limaPuluhRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = false;
+                        isLimaRibu = false;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = true;
+                        isSeratusRibu = false;
+                        Log.println(Log.ASSERT, "message", "50.000");
+                    } else if (!isSeratusRibu && recognitionTextView.getText().toString().equalsIgnoreCase("100.000") && confi > 0.30) {
+                        seratusRibu = MediaPlayer.create(this, R.raw.seratus_ribu);
+                        seratusRibu.start();
+                        isSeribu = false;
+                        isDuaRibu = false;
+                        isLimaRibu = false;
+                        isSepuluhRibu = false;
+                        isDuaPuluhRibu = false;
+                        isLimaPuluhRibu = false;
+                        isSeratusRibu = true;
+                        Log.println(Log.ASSERT, "message", "100.000");
+                    }
+
+
+                } catch (Exception e) {
+                    Toast.makeText(this, "error  " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
-//                }
-//                catch (Exception e) {
-//                    Toast.makeText(this, "error  " + e.getLocalizedMessage(), Toast.LENGTH_LONG).show();
-//                    e.printStackTrace();
-//                }
             }
 
             Classifier.Recognition recognition1 = results.get(1);

@@ -36,12 +36,12 @@ public class ClassifierFloatMobileNet extends Classifier {
         // you can download this file from
         // see build.gradle for where to obtain this file. It should be auto
         // downloaded into assets.
-        return "model_uang.tflite";
+        return "model-test-v5.tflite";
     }
 
     @Override
     protected String getLabelPath() {
-        return "labels.txt";
+        return "labels-test-v5.txt";
     }
 
     @Override
