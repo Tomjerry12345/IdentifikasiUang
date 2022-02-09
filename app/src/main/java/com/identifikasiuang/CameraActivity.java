@@ -578,7 +578,7 @@ public abstract class CameraActivity extends AppCompatActivity
                             public  void onFinish(){
                                 test = false;
                                 Toast.makeText(CameraActivity.this, "Finish", Toast.LENGTH_LONG).show();
-                                Log.println(Log.ASSERT, "finidh", "success");
+                                Log.println(Log.ASSERT, "finish", "success");
                                 if (!isSeribu && recognitionTextView.getText().toString().equalsIgnoreCase("1.000") && confi > 99.0) {
                                     seribu = MediaPlayer.create(CameraActivity.this, R.raw.seribu);
                                     seribu.start();
