@@ -41,10 +41,10 @@
 
             <TextView
                 android:layout_width="match_parent"
-                android:text="Currency Detector App"
+                android:layout_height="wrap_content"
+                android:text="Identifikasi Uang"
                 android:textColor="#fff"
-                android:textSize="20sp"
-                android:layout_height="wrap_content"/>
+                android:textSize="20sp" />
         </androidx.appcompat.widget.Toolbar>
 
     </RelativeLayout>
